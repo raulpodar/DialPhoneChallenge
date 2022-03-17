@@ -38,7 +38,7 @@ class MainViewModel
                 dialPhoneNumbersDomainToPresentationMapper(domainModel)
             }
             .onErrorReturn {
-                DialPhoneNumberUiModel("null",  HashSet(listOf("mnull","mull")), false)
+                DialPhoneNumberUiModel("null",  arrayListOf("bad errror"), false)
             }
             .subscribeOn(schedulersProvider.io())
             .observeOn(schedulersProvider.main())
@@ -68,6 +68,22 @@ class MainViewModel
             .subscribe { uiModel ->
                 uiModelLiveData.postValue(uiModel)
             }
+
+        compositeDisposable.add(disposable)
+    }
+
+    fun userHasDialed(number:String){
+        val disposable=userHasDialedUseCase.buildUseCase(number)
+            .map { newDomainModel->
+                dialPhoneNumbersDomainToPresentationMapper(newDomainModel)
+            }
+            .subscribeOn(schedulersProvider.io())
+            .observeOn(schedulersProvider.main())
+            .subscribe { uiModel ->
+                Log.v("listt",uiModel.dialedPhoneNumbers.toString())
+                uiModelLiveData.postValue(uiModel)
+            }
+
 
         compositeDisposable.add(disposable)
     }

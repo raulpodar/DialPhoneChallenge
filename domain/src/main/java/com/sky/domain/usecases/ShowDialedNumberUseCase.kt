@@ -8,7 +8,7 @@ class ShowDialedNumberUseCase
 @Inject constructor(
     private val dialRepository: DialRepository
 ){
-    fun buildUseCase(): Single<MutableSet<String>> {
+    fun buildUseCase(): Single<String> {
         return dialRepository.getNumber()
     }
 }

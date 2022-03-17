@@ -8,5 +8,5 @@ interface DialRepository {
 
     fun writeNumber(number: String)
     fun updateNumber(number:String):Completable
-    fun getNumber(): Single<MutableSet<String>>
+    fun getNumber(): Single<String>
 }

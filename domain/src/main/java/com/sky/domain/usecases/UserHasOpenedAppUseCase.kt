@@ -13,8 +13,8 @@ class UserHasOpenedAppUseCase
     fun buildUseCase(): Single<PhoneNumberModel> {
         return dialRepository.getNumber()
             .map{ list->
-
-                PhoneNumberModel(typedNumber = "", dialedPhonedNumbers = list,shouldShowDial = false)
+                var dialedPhoneNumbers=list.split(",")
+                PhoneNumberModel(typedNumber = "", dialedPhonedNumbers = dialedPhoneNumbers,shouldShowDial = false)
             }
     }
 }

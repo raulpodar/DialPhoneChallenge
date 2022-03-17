@@ -1,13 +1,21 @@
 package com.sky.domain.usecases
 
+import com.sky.domain.models.PhoneNumberModel
 import com.sky.domain.repositories.DialRepository
 import io.reactivex.Completable
+import io.reactivex.Single
 import javax.inject.Inject
 
 class UserHasDialedUseCase @Inject constructor(
     private val dialRepository: DialRepository
 ){
-    fun buildUseCase(number:String): Completable {
-        return dialRepository.updateNumber(number)
+    fun buildUseCase(number:String): Single<PhoneNumberModel> {
+        dialRepository.updateNumber(number)
+        return dialRepository.getNumber()
+            .map{ list->
+                var dialedPhoneNumbers2=list.split(",")
+                PhoneNumberModel(typedNumber = "", dialedPhonedNumbers = dialedPhoneNumbers2,shouldShowDial = false)
+            }
+        //return dialRepository.updateNumber(number)
     }
 }

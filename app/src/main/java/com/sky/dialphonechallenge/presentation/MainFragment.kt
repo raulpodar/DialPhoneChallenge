@@ -53,11 +53,13 @@ class MainFragment : Fragment() {
     private fun handleShowDialButtonEvent(uiModel: DialPhoneNumberUiModel?) {
         Log.e("sizee",uiModel?.dialedPhoneNumbers?.size.toString())
         uiModel?.let {
-            if (it.shouldShowDialButton) {
+            if (it.shouldShowDialButton ) {
                 var dialButton=binding.dialButton
                 dialButton.visibility=View.VISIBLE
-
-
+            }
+            else {
+                var dialButton=binding.dialButton
+                dialButton.visibility=View.GONE
             }
 //            (view?.findViewById(R.id.message) as? TextView)?.text = it.launchCountMessage
         }
@@ -75,6 +77,12 @@ class MainFragment : Fragment() {
         binding.button8.setOnClickListener(object : CustomOnClickListener(binding,binding.button8,viewModel){})
         binding.button9.setOnClickListener(object : CustomOnClickListener(binding,binding.button9,viewModel){})
         binding.button0.setOnClickListener(object : CustomOnClickListener(binding,binding.button0,viewModel){})
+        binding.dialButton.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(p0: View?) {
+                viewModel.userHasDialed(binding.textView.text.toString())
+            }
+
+        })
 
     }
 

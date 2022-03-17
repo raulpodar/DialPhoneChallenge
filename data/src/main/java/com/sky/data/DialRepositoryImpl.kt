@@ -15,19 +15,18 @@ class DialRepositoryImpl
     override fun updateNumber(number:String):Completable {
         return getNumber()
             .flatMapCompletable { currentList->
-                currentList.add(number)
+                var newList = currentList + "," + number
                 sharedPreferences
                     .edit()
-                    .putStringSet(DIALED_NUMBERS_KEY, currentList)
+                    .putString(DIALED_NUMBERS_KEY, newList)
                     .apply()
                 Completable.complete()
             }
     }
 
-    override fun getNumber() : Single<MutableSet<String>> {
-
+    override fun getNumber() : Single<String> {
         return Single.fromCallable{
-                sharedPreferences.getStringSet(DIALED_NUMBERS_KEY, mutableSetOf()  )?.toMutableSet()
+                sharedPreferences.getString(DIALED_NUMBERS_KEY, "")
         }
     }
 
