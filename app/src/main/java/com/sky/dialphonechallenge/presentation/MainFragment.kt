@@ -85,10 +85,9 @@ class MainFragment : Fragment() {
         })
         binding.deleteButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                if(binding.textView.text.length>0){
+
                     viewModel.userHasDeleted(binding.textView.text.toString())
 
-                }
             }
 
         })

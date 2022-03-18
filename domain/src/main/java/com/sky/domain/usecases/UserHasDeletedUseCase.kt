@@ -10,10 +10,11 @@ class UserHasDeletedUseCase
 
 
         fun buildUseCase(oldString:String, currentModel:PhoneNumberModel): Single<PhoneNumberModel> {
-            lateinit var  newString:String
+            var  newString:String=""
             if(oldString.length>0){
                 newString=oldString.subSequence(0,oldString.length-1).toString()
             }
+
             var shouldShow=newString.length==11
             return Single.fromCallable{
                 PhoneNumberModel(
