@@ -21,11 +21,12 @@ class MainViewModel
     private val userHasDialedUseCase: UserHasDialedUseCase,
     private val userHasTypedUseCase: UserHasTypedUseCase,
     private val userHasOpenedAppUseCase: UserHasOpenedAppUseCase,
+    private val userHasDeletedUseCase: UserHasDeletedUseCase,
     private val dialPhoneNumbersDomainToPresentationMapper: DialPhoneNumbersDomainToPresentationMapper,
     private val schedulersProvider: SchedulersProvider
 ):ViewModel(){
     internal val uiModelLiveData: MutableLiveData<DialPhoneNumberUiModel> = MutableLiveData()
-     var domainModel:PhoneNumberModel = PhoneNumberModel()
+    var domainModel:PhoneNumberModel = PhoneNumberModel()
     private val compositeDisposable = CompositeDisposable()
 
     init {
@@ -90,6 +91,22 @@ class MainViewModel
     override fun onCleared() {
         compositeDisposable.clear()
         super.onCleared()
+    }
+
+    fun userHasDeleted(oldString:String) {
+        val disposable=userHasDeletedUseCase.buildUseCase(oldString,domainModel)
+            .map { newDomainModel->
+                dialPhoneNumbersDomainToPresentationMapper(newDomainModel)
+            }
+            .subscribeOn(schedulersProvider.io())
+            .observeOn(schedulersProvider.main())
+            .subscribe { uiModel ->
+                Log.v("listt",uiModel.dialedPhoneNumbers.toString())
+                uiModelLiveData.postValue(uiModel)
+            }
+
+        compositeDisposable.add(disposable)
+
     }
 
 
