@@ -1,6 +1,7 @@
 package com.sky.dialphonechallenge.presentation
 
 
+import CustomAdapter
 import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
@@ -41,9 +42,9 @@ class MainFragment : Fragment() {
         viewModel.uiModelLiveData.observe(viewLifecycleOwner) {
             handleShowDialButtonEvent(it)
             handleButtonEvent(it)
+            binding.recyclerView.adapter=CustomAdapter(it.dialedPhoneNumbers)
         }
 
-        onUserTyping()
     }
 
     private fun handleButtonEvent(uiModel: DialPhoneNumberUiModel?) {
@@ -77,6 +78,7 @@ class MainFragment : Fragment() {
         binding.button8.setOnClickListener(object : CustomOnClickListener(binding,binding.button8,viewModel){})
         binding.button9.setOnClickListener(object : CustomOnClickListener(binding,binding.button9,viewModel){})
         binding.button0.setOnClickListener(object : CustomOnClickListener(binding,binding.button0,viewModel){})
+
         binding.dialButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 viewModel.userHasDialed(binding.textView.text.toString())

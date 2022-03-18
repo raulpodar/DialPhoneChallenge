@@ -1,5 +1,6 @@
 package com.sky.dialphonechallenge.presentation
 
+import CustomAdapter
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
@@ -16,14 +17,13 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel
 @Inject constructor(
-    private val isValidPhoneNumberUseCase: IsValidPhoneNumberUseCase,
-    private val showDialedNumberUseCase: ShowDialedNumberUseCase,
+
     private val userHasDialedUseCase: UserHasDialedUseCase,
     private val userHasTypedUseCase: UserHasTypedUseCase,
     private val userHasOpenedAppUseCase: UserHasOpenedAppUseCase,
     private val userHasDeletedUseCase: UserHasDeletedUseCase,
     private val dialPhoneNumbersDomainToPresentationMapper: DialPhoneNumbersDomainToPresentationMapper,
-    private val schedulersProvider: SchedulersProvider
+    private val schedulersProvider: SchedulersProvider,
 ):ViewModel(){
     internal val uiModelLiveData: MutableLiveData<DialPhoneNumberUiModel> = MutableLiveData()
     var domainModel:PhoneNumberModel = PhoneNumberModel()
@@ -46,18 +46,11 @@ class MainViewModel
             .subscribe { uiModel ->
                 uiModelLiveData.postValue(uiModel)
             }
-//            .map { DialPhoneNumbersDomainToPresentationMapper() }
-//            .subscribeOn(schedulersProvider.io())
-//            .observeOn(schedulersProvider.main())
-//            .subscribe( uiModel->
 
         compositeDisposable.add(disposable)
     }
 
-//    fun onUserHasClicked(){
-//        val disposable=UserHasTypedUseCase.buildUseCase()
-//
-//    }
+
 
     fun userHasTyped(number:String){
         val disposable=userHasTypedUseCase.buildUseCase(number,domainModel)

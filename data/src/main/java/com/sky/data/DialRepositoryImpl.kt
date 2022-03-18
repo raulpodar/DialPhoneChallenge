@@ -16,25 +16,21 @@ class DialRepositoryImpl
     }
 
     override fun updateNumber(number:String):Completable {
-//        sharedPreferences
-//            .edit()
-//            .putString(DIALED_NUMBERS_KEY, "oout")
-//            .apply()
         return getNumber()
             .flatMapCompletable { currentList->
                 var newList = currentList + "," + number
                 sharedPreferences
                     .edit()
-                    .putString(DIALED_NUMBERS_KEY, "342")
+                    .putString(DIALED_NUMBERS_KEY, newList)
                     .apply()
                 Completable.complete()
             }
     }
 
     override fun getNumber() : Single<String> {
-        var returnedValue=sharedPreferences.getString(DIALED_NUMBERS_KEY, "")
+
         return Single.fromCallable{
-               returnedValue
+            sharedPreferences.getString(DIALED_NUMBERS_KEY, "")
         }
     }
 
