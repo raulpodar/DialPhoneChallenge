@@ -10,8 +10,8 @@ class UserHasDialedUseCase @Inject constructor(
     private val dialRepository: DialRepository
 ){
     fun buildUseCase(number:String): Single<PhoneNumberModel> {
-        dialRepository.updateNumber(number)
-        return dialRepository.getNumber()
+        return dialRepository.updateNumber(number)
+            .andThen(dialRepository.getNumber())
             .map{ list->
                 var dialedPhoneNumbers2=list.split(",")
                 PhoneNumberModel(typedNumber = "", dialedPhonedNumbers = dialedPhoneNumbers2,shouldShowDial = false)

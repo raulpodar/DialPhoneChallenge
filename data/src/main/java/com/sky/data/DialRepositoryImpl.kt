@@ -25,7 +25,7 @@ class DialRepositoryImpl
                 var newList = currentList + "," + number
                 sharedPreferences
                     .edit()
-                    .putString(DIALED_NUMBERS_KEY, "342")
+                    .putString(DIALED_NUMBERS_KEY, newList)
                     .apply()
                 Completable.complete()
             }
