@@ -1,6 +1,7 @@
 package com.sky.dialphonechallenge.presentation
 
 
+import CustomAdapter
 import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sky.dialphonechallenge.R
 import com.sky.dialphonechallenge.databinding.MainFragmentBinding
 import com.sky.dialphonechallenge.presentation.uiModels.DialPhoneNumberUiModel
@@ -22,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
+
     companion object {
         fun newInstance() = MainFragment()
     }
@@ -29,10 +33,12 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter:CustomAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
+
         return view
     }
 
@@ -41,6 +47,8 @@ class MainFragment : Fragment() {
         viewModel.uiModelLiveData.observe(viewLifecycleOwner) {
             handleShowDialButtonEvent(it)
             handleButtonEvent(it)
+            Log.v("list", it.dialedPhoneNumbers.size.toString())
+            binding.phoneNumberList.adapter=CustomAdapter(it.dialedPhoneNumbers)
         }
 
         onUserTyping()
