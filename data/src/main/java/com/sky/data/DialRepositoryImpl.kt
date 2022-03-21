@@ -16,13 +16,15 @@ class DialRepositoryImpl
     }
 
     override fun updateNumber(number:String):Completable {
-//        sharedPreferences
-//            .edit()
-//            .putString(DIALED_NUMBERS_KEY, "oout")
-//            .apply()
         return getNumber()
             .flatMapCompletable { currentList->
-                var newList = currentList + "," + number
+                var newList:String
+                if (currentList!=""){
+                    newList = currentList + "," + number
+                }
+                else{
+                    newList=number
+                }
                 sharedPreferences
                     .edit()
                     .putString(DIALED_NUMBERS_KEY, newList)

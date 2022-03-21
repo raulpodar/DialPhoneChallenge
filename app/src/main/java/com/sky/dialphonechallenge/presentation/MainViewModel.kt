@@ -34,8 +34,8 @@ class MainViewModel
     }
     fun onAppLaunched(){
         val disposable=userHasOpenedAppUseCase.buildUseCase()
-            .map { domainModel2->
-                domainModel=domainModel2
+            .map { newDomainModel->
+                domainModel=newDomainModel
                 dialPhoneNumbersDomainToPresentationMapper(domainModel)
             }
             .onErrorReturn {
@@ -46,18 +46,11 @@ class MainViewModel
             .subscribe { uiModel ->
                 uiModelLiveData.postValue(uiModel)
             }
-//            .map { DialPhoneNumbersDomainToPresentationMapper() }
-//            .subscribeOn(schedulersProvider.io())
-//            .observeOn(schedulersProvider.main())
-//            .subscribe( uiModel->
+
 
         compositeDisposable.add(disposable)
     }
 
-//    fun onUserHasClicked(){
-//        val disposable=UserHasTypedUseCase.buildUseCase()
-//
-//    }
 
     fun userHasTyped(number:String){
         val disposable=userHasTypedUseCase.buildUseCase(number,domainModel)

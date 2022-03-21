@@ -14,8 +14,9 @@ class UserHasDialedUseCase @Inject constructor(
             .andThen(dialRepository.getNumber())
             .map{ list->
                 var dialedPhoneNumbers2=list.split(",")
+
                 PhoneNumberModel(typedNumber = "", dialedPhonedNumbers = dialedPhoneNumbers2,shouldShowDial = false)
             }
-        //return dialRepository.updateNumber(number)
+
     }
 }
