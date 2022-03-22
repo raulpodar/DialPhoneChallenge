@@ -27,16 +27,16 @@ class DialRepositoryImpl
                 }
                 sharedPreferences
                     .edit()
-                    .putString(DIALED_NUMBERS_KEY, newList)
+                      .putString(DIALED_NUMBERS_KEY, newList)
                     .apply()
                 Completable.complete()
             }
     }
 
     override fun getNumber() : Single<String> {
-        var returnedValue=sharedPreferences.getString(DIALED_NUMBERS_KEY, "")
+
         return Single.fromCallable{
-               returnedValue
+                sharedPreferences.getString(DIALED_NUMBERS_KEY, "")
         }
     }
 
