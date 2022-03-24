@@ -37,6 +37,7 @@ class DialRepositoryImpl
 
         return Single.fromCallable{
                 sharedPreferences.getString(DIALED_NUMBERS_KEY, "")
+
         }
     }
 

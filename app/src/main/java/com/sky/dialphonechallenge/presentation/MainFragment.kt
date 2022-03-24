@@ -2,6 +2,8 @@ package com.sky.dialphonechallenge.presentation
 
 
 import CustomAdapter
+
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -43,7 +45,6 @@ class MainFragment : Fragment() {
             binding.phoneNumberList.adapter=CustomAdapter(it.dialedPhoneNumbers)
         }
 
-        onUserTyping()
     }
 
     private fun handleButtonEvent(uiModel: DialPhoneNumberUiModel?) {
@@ -88,6 +89,7 @@ class MainFragment : Fragment() {
         binding.button8.setOnClickListener(listener)
         binding.button9.setOnClickListener(listener)
         binding.button0.setOnClickListener(listener)
+
 
         binding.dialButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {

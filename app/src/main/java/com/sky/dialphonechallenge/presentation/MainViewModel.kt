@@ -1,5 +1,6 @@
 package com.sky.dialphonechallenge.presentation
 
+import CustomAdapter
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
@@ -16,12 +17,13 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel
 @Inject constructor(
+
     private val userHasDialedUseCase: UserHasDialedUseCase,
     private val userHasTypedUseCase: UserHasTypedUseCase,
     private val userHasOpenedAppUseCase: UserHasOpenedAppUseCase,
     private val userHasDeletedUseCase: UserHasDeletedUseCase,
     private val dialPhoneNumbersDomainToPresentationMapper: DialPhoneNumbersDomainToPresentationMapper,
-    private val schedulersProvider: SchedulersProvider
+    private val schedulersProvider: SchedulersProvider,
 ):ViewModel(){
     internal val uiModelLiveData: MutableLiveData<DialPhoneNumberUiModel> = MutableLiveData()
     var domainModel:PhoneNumberModel = PhoneNumberModel()
@@ -43,9 +45,9 @@ class MainViewModel
                 uiModelLiveData.postValue(uiModel)
             }
 
-
         compositeDisposable.add(disposable)
     }
+
 
 
     fun userHasTyped(number:String){
