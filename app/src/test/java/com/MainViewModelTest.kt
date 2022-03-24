@@ -101,25 +101,25 @@ class MainViewModelTest{
 
     }
 
-//
-//    @Test
-//    fun `when user has typed then update domain model and post expected ui model to presentation`(){
-//        // Given
-//        val phoneNumberModel = mock<PhoneNumberModel> {
-//            on { shouldShowDial } doReturn false
-//        }
-//        whenever(userHasTypedUseCase.buildUseCase(number="0",phoneNumberModel)).thenReturn(Single.just(phoneNumberModel))
-//        val uiModel = mock<DialPhoneNumberUiModel>()
-//        whenever(dialPhoneNumbersDomainToPresentationMapper.invoke(phoneNumberModel)).thenReturn(uiModel)
-//
-//        // When
-//        cut.onAppLaunched()
-//
-//        // Then
-//
-//        verify(userHasTypedUseCase).buildUseCase("0",phoneNumberModel)
-//        verify(uiStateObserver).onChanged(uiModel)
-//
-//    }
+    @Test
+
+    fun `when user has dialed then update domain model and post expected ui model to presentation`(){
+        // Given
+        val phoneNumberModel = mock<PhoneNumberModel> {
+            on { shouldShowDial } doReturn false
+        }
+
+
+        whenever(userHasDialedUseCase.buildUseCase(number = "11")).thenReturn(Single.just(phoneNumberModel))
+        val uiModel = mock<DialPhoneNumberUiModel>()
+        whenever(dialPhoneNumbersDomainToPresentationMapper.invoke(phoneNumberModel)).thenReturn(uiModel)
+
+        // When
+        cut.userHasDialed("11")
+        verify(userHasDialedUseCase).buildUseCase("11")
+        verify(uiStateObserver, times(1)).onChanged(uiModel)
+
+    }
+
 
 }

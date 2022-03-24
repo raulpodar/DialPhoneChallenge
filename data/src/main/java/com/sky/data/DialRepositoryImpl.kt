@@ -27,7 +27,7 @@ class DialRepositoryImpl
                 }
                 sharedPreferences
                     .edit()
-                      .putString(DIALED_NUMBERS_KEY, newList)
+                    .putString(DIALED_NUMBERS_KEY, newList)
                     .apply()
                 Completable.complete()
             }

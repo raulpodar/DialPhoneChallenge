@@ -20,6 +20,13 @@ class UserHasTypedUseCase @Inject constructor(
                     shouldShowDial = shouldShow
                 )
             }
+            .onErrorReturnItem(
+                PhoneNumberModel(
+                typedNumber = number,
+                dialedPhonedNumbers = emptyList(),
+                shouldShowDial = false
+                )
+            )
 
         }
 
