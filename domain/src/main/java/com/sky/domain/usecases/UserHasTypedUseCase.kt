@@ -9,14 +9,25 @@ class UserHasTypedUseCase @Inject constructor(
     private val dialRepository: DialRepository
 ){
     fun buildUseCase(number:String, currentModel: PhoneNumberModel ): Single<PhoneNumberModel> {
-        var shouldShow=number.length==11
-        return Single.fromCallable{
+
+
+        return dialRepository.getNumber()
+            .map {
+                var shouldShow=number.length==11
                 PhoneNumberModel(
                     typedNumber =number,
                     dialedPhonedNumbers = currentModel.dialedPhonedNumbers,
                     shouldShowDial = shouldShow
                 )
+            }
+            .onErrorReturnItem(
+                PhoneNumberModel(
+                typedNumber = number,
+                dialedPhonedNumbers = emptyList(),
+                shouldShowDial = false
+                )
+            )
+
         }
 
     }
-}

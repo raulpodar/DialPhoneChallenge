@@ -12,7 +12,6 @@ open class CustomOnClickListener(private val viewBinding:MainFragmentBinding,
                                  private val model:MainViewModel
                             ) : View.OnClickListener {
     override fun onClick(p0: View?) {
-        Log.v(buttonClicked.text.toString(),p0?.id.toString())
         var textView: TextView =viewBinding.textView
         var newText=textView.text.toString()+buttonClicked.text
         model.userHasTyped(newText)

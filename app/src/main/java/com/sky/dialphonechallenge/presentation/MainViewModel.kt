@@ -29,13 +29,11 @@ class MainViewModel
     var domainModel:PhoneNumberModel = PhoneNumberModel()
     private val compositeDisposable = CompositeDisposable()
 
-    init {
-        Log.v("initialise", "heyyyy")
-    }
+
     fun onAppLaunched(){
         val disposable=userHasOpenedAppUseCase.buildUseCase()
-            .map { domainModel2->
-                domainModel=domainModel2
+            .map { newDomainModel->
+                domainModel=newDomainModel
                 dialPhoneNumbersDomainToPresentationMapper(domainModel)
             }
             .onErrorReturn {
@@ -55,7 +53,8 @@ class MainViewModel
     fun userHasTyped(number:String){
         val disposable=userHasTypedUseCase.buildUseCase(number,domainModel)
             .map { newDomainModel->
-                dialPhoneNumbersDomainToPresentationMapper(newDomainModel)
+                domainModel=newDomainModel
+                dialPhoneNumbersDomainToPresentationMapper(domainModel)
             }
             .subscribeOn(schedulersProvider.io())
             .observeOn(schedulersProvider.main())
@@ -69,12 +68,13 @@ class MainViewModel
     fun userHasDialed(number:String){
         val disposable=userHasDialedUseCase.buildUseCase(number)
             .map { newDomainModel->
-                dialPhoneNumbersDomainToPresentationMapper(newDomainModel)
+                domainModel=newDomainModel
+                dialPhoneNumbersDomainToPresentationMapper(domainModel)
             }
             .subscribeOn(schedulersProvider.io())
             .observeOn(schedulersProvider.main())
             .subscribe { uiModel ->
-                Log.v("listt",uiModel.dialedPhoneNumbers.toString())
+//                Log.v("listt",uiModel.dialedPhoneNumbers.toString())
                 uiModelLiveData.postValue(uiModel)
             }
 
@@ -94,7 +94,7 @@ class MainViewModel
             .subscribeOn(schedulersProvider.io())
             .observeOn(schedulersProvider.main())
             .subscribe { uiModel ->
-                Log.v("listt",uiModel.dialedPhoneNumbers.toString())
+//                Log.v("listt",uiModel.dialedPhoneNumbers.toString())
                 uiModelLiveData.postValue(uiModel)
             }
 

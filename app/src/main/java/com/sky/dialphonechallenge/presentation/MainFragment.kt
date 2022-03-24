@@ -2,6 +2,7 @@ package com.sky.dialphonechallenge.presentation
 
 
 import CustomAdapter
+
 import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
@@ -9,19 +10,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.sky.dialphonechallenge.R
 import com.sky.dialphonechallenge.databinding.MainFragmentBinding
 import com.sky.dialphonechallenge.presentation.uiModels.DialPhoneNumberUiModel
-import com.sky.dialphonechallenge.presentation.utils.CustomOnClickListener
-import com.sky.dialphonechallenge.presentation.utils.DebouncedOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
+
 
     companion object {
         fun newInstance() = MainFragment()
@@ -30,10 +27,12 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter:CustomAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
+
         return view
     }
 
@@ -42,7 +41,8 @@ class MainFragment : Fragment() {
         viewModel.uiModelLiveData.observe(viewLifecycleOwner) {
             handleShowDialButtonEvent(it)
             handleButtonEvent(it)
-            binding.recyclerView.adapter=CustomAdapter(it.dialedPhoneNumbers)
+            Log.v("list", it.dialedPhoneNumbers.size.toString())
+            binding.phoneNumberList.adapter=CustomAdapter(it.dialedPhoneNumbers)
         }
 
     }
@@ -68,16 +68,28 @@ class MainFragment : Fragment() {
     }
 
     private fun onUserTyping(){
-        binding.button.setOnClickListener(object : CustomOnClickListener(binding,binding.button,viewModel){})
-        binding.button2.setOnClickListener(object : CustomOnClickListener(binding,binding.button2,viewModel){})
-        binding.button3.setOnClickListener(object : CustomOnClickListener(binding,binding.button3,viewModel){})
-        binding.button4.setOnClickListener(object : CustomOnClickListener(binding,binding.button4,viewModel){})
-        binding.button5.setOnClickListener(object : CustomOnClickListener(binding,binding.button5,viewModel){})
-        binding.button6.setOnClickListener(object : CustomOnClickListener(binding,binding.button6,viewModel){})
-        binding.button7.setOnClickListener(object : CustomOnClickListener(binding,binding.button7,viewModel){})
-        binding.button8.setOnClickListener(object : CustomOnClickListener(binding,binding.button8,viewModel){})
-        binding.button9.setOnClickListener(object : CustomOnClickListener(binding,binding.button9,viewModel){})
-        binding.button0.setOnClickListener(object : CustomOnClickListener(binding,binding.button0,viewModel){})
+
+
+        val listener= object : View.OnClickListener {
+
+            override fun onClick(view: View){
+                var textView: TextView =binding.textView
+                var newText=textView.text.toString()+view?.getTag()
+                Log.v("tagText",newText)
+                viewModel.userHasTyped(newText)
+            }
+        }
+        binding.button.setOnClickListener(listener)
+        binding.button2.setOnClickListener(listener)
+        binding.button3.setOnClickListener(listener)
+        binding.button4.setOnClickListener(listener)
+        binding.button5.setOnClickListener(listener)
+        binding.button6.setOnClickListener(listener)
+        binding.button7.setOnClickListener(listener)
+        binding.button8.setOnClickListener(listener)
+        binding.button9.setOnClickListener(listener)
+        binding.button0.setOnClickListener(listener)
+
 
         binding.dialButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
