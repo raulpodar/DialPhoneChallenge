@@ -1,216 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sky_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttonsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <Button
+            android:id="@+id/button"
+            style="@style/NumberButton"
+            android:tag="1"
+            android:text="ONE"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/NumberButton"
+            android:tag="2"
+            android:text="TWO"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/NumberButton"
+            android:tag="3"
+            android:text="THREE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button4"
+            style="@style/NumberButton"
+            android:tag="4"
+            android:text="FOUR"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <Button
+            android:id="@+id/button5"
+            style="@style/NumberButton"
+            android:tag="5"
+            android:text="FIVE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+        <Button
+            android:id="@+id/button6"
+            style="@style/NumberButton"
+            android:tag="6"
+            android:text="SIX"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button3" />
+
+        <Button
+            android:id="@+id/button7"
+            style="@style/NumberButton"
+            android:tag="7"
+            android:text="SEVEN"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+        <Button
+            android:id="@+id/button8"
+            style="@style/NumberButton"
+            android:tag="8"
+            android:text="EIGHT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button5" />
+
+        <Button
+            android:id="@+id/button9"
+            style="@style/NumberButton"
             android:backgroundTint="@color/buttonColor"
-            app:layout_constraintBottom_toTopOf="@+id/button9"
-            app:layout_constraintTop_toTopOf="@+id/button9">
+            android:tag="9"
+            android:text="NINE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button6" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
-                android:layout_width="403dp"
-                android:layout_height="316dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView">
+        <Button
+            android:id="@+id/button0"
+            style="@style/NumberButton"
+            android:tag="0"
+            android:text="ZERO"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button8" />
 
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="88dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="24dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:tag="5"
-                    android:text="FIVE"
-                    app:layout_constraintEnd_toEndOf="@+id/button6"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button2" />
+        <Button
+            android:id="@+id/deleteButton"
+            style="@style/NumberButton"
+            android:text="Delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button9" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <Button
-                    android:id="@+id/button7"
-                    android:layout_width="88dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:tag="7"
-                    android:text="SEVEN"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button4" />
+    <Button
+        android:id="@+id/dialButton"
+        style="@style/NumberButton"
+        android:text="Dial"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonsLayout" />
 
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="88dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:tag="1"
-                    android:text="ONE"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonsLayout"/>
 
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="88dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:tag="3"
-                    android:text="THREE"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/phoneNumberList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:paddingTop="40dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonsLayout" />
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="88dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:tag="4"
-                    android:text="FOUR"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button" />
-
-                <Button
-                    android:id="@+id/button0"
-                    android:layout_width="88dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:tag="0"
-                    android:text="ZERO"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.476"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button8" />
-
-                <Button
-                    android:id="@+id/button8"
-                    android:layout_width="88dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:tag="8"
-                    android:text="EIGHT"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.476"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button5" />
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="88dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:tag="2"
-                    android:text="TWO"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.448"
-                    app:layout_constraintStart_toStartOf="@+id/button"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/button6"
-                    android:layout_width="88dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:tag="6"
-                    android:text="SIX"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button3" />
-
-                <Button
-                    android:id="@+id/button9"
-                    android:layout_width="88dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:tag="9"
-                    android:text="NINE"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button6" />
-
-                <Button
-                    android:id="@+id/deleteButton"
-                    android:layout_width="88dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="16dp"
-
-                    android:layout_marginEnd="16dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:text="Delete"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button9" />
-
-                <Button
-                    android:id="@+id/dialButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/buttonColor"
-                    android:text="Dial"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.476"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="192dp"
-                android:layout_height="54dp"
-                android:src="@drawable/sky_logo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="357dp"
-                android:layout_height="53dp"
-                android:background="@color/white"
-                android:backgroundTint="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/phoneNumberList"
-                android:layout_width="386dp"
-                android:layout_height="270dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.64"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-                app:layout_constraintVertical_bias="1.0" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,13 +8,9 @@ import javax.inject.Inject
 
 class UserHasOpenedAppUseCase
 @Inject constructor(
-    private val dialRepository: DialRepository
+    private val dialRepository: DialRepository,
 ){
     fun buildUseCase(): Single<PhoneNumberModel> {
-        return dialRepository.getNumber()
-            .map{ list->
-                var dialedPhoneNumbers=list.split(",")
-                PhoneNumberModel(typedNumber = "", dialedPhonedNumbers = dialedPhoneNumbers,shouldShowDial = false)
-            }
+        return dialRepository.getNumbers()
     }
 }

@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import com.sky.dialphonechallenge.R
 import com.sky.dialphonechallenge.databinding.MainFragmentBinding
 import com.sky.dialphonechallenge.presentation.uiModels.DialPhoneNumberUiModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +33,19 @@ class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        val spinner: Spinner = binding.spinner
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            container!!.context,
+            R.array.options_numbers,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
 
         return view
     }

@@ -11,7 +11,7 @@ class UserHasTypedUseCase @Inject constructor(
     fun buildUseCase(number:String, currentModel: PhoneNumberModel ): Single<PhoneNumberModel> {
 
 
-        return dialRepository.getNumber()
+        return dialRepository.getNumbers()
             .map {
                 var shouldShow=number.length==11
                 PhoneNumberModel(

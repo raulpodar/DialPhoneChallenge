@@ -11,7 +11,7 @@ import com.sky.model.PhoneNumberDao
 @Database(entities = arrayOf(PhoneNumberDTO::class), version = 1, exportSchema = false)
 public abstract class PhoneNumberRoomDatabase : RoomDatabase() {
 
-    abstract fun wordDao(): PhoneNumberDao
+    abstract fun phoneNumberDao(): PhoneNumberDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the

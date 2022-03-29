@@ -4,10 +4,12 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.sky.data.PhoneNumberRoomDatabase
 import com.sky.dialphonechallenge.presentation.mappers.DialPhoneNumbersDomainToPresentationMapper
 import com.sky.dialphonechallenge.presentation.uiModels.DialPhoneNumberUiModel
 import com.sky.dialphonechallenge.presentation.utils.SchedulersProvider
 import com.sky.domain.models.PhoneNumberModel
+import com.sky.domain.repositories.DialRepository
 import com.sky.domain.usecases.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
@@ -21,12 +23,15 @@ class MainViewModel
     private val userHasOpenedAppUseCase: UserHasOpenedAppUseCase,
     private val userHasDeletedUseCase: UserHasDeletedUseCase,
     private val dialPhoneNumbersDomainToPresentationMapper: DialPhoneNumbersDomainToPresentationMapper,
-    private val schedulersProvider: SchedulersProvider
+    private val schedulersProvider: SchedulersProvider,
+    private val database:PhoneNumberRoomDatabase,
 ):ViewModel(){
     internal val uiModelLiveData: MutableLiveData<DialPhoneNumberUiModel> = MutableLiveData()
     var domainModel:PhoneNumberModel = PhoneNumberModel()
     private val compositeDisposable = CompositeDisposable()
 
+    val database2 by lazy { database2.getDatabase(this, applicationScope) }
+    val repository by lazy { DialRepository(database.phoneNumberDao()) }
 
     fun onAppLaunched(){
         val disposable=userHasOpenedAppUseCase.buildUseCase()
