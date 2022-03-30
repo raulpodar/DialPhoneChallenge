@@ -1,10 +1,11 @@
 package com.sky.model
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
-import com.sky.domain.models.PhoneNumberModel
+
+
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -18,8 +19,8 @@ interface PhoneNumberDao {
     fun insert(word: PhoneNumberDTO) : Completable
 
     @Query("SELECT * FROM phoneNumbers ORDER BY ID ASC")
-    fun getPhoneNumbersAscOrder():List<Single<PhoneNumberDTO>>
+    fun getPhoneNumbersAscOrder():Single<List<PhoneNumberDTO>>
 
     @Query("SELECT * FROM phoneNumbers ORDER BY ID DESC")
-    fun getPhoneNumbersDescOrder():List<Single<PhoneNumberDTO>>
+    fun getPhoneNumbersDescOrder():Single<List<PhoneNumberDTO>>
 }

@@ -6,7 +6,8 @@ import javax.inject.Inject
 
 
 
-class PhoneNumberDtoToDomainMapper @Inject constructor(){
+class PhoneNumberDtoToDomainMapper
+@Inject constructor(){
 
     operator fun invoke(phoneNumbersList: List<PhoneNumberDTO>):PhoneNumberModel{
         return PhoneNumberModel(

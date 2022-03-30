@@ -83,8 +83,6 @@ class MainFragment : Fragment() {
     }
 
     private fun onUserTyping(){
-
-
         val listener= object : View.OnClickListener {
 
             override fun onClick(view: View){

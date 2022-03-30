@@ -46,8 +46,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
 //    ROOM
-    implementation "android.arch.persistence.room:common:1.1.1"
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    implementation "androidx.room:room-runtime:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+    // optional - RxJava2 support for Room
     implementation "androidx.room:room-rxjava2:2.4.2"
 
     // Testing support

@@ -6,7 +6,6 @@ import io.reactivex.Single
 
 interface DialRepository {
 
-
     fun updateNumbers(number:String):Completable
     fun getNumbers(): Single<PhoneNumberModel>
 }

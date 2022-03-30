@@ -25,13 +25,12 @@ class MainViewModel
     private val dialPhoneNumbersDomainToPresentationMapper: DialPhoneNumbersDomainToPresentationMapper,
     private val schedulersProvider: SchedulersProvider,
     private val database:PhoneNumberRoomDatabase,
+
 ):ViewModel(){
     internal val uiModelLiveData: MutableLiveData<DialPhoneNumberUiModel> = MutableLiveData()
     var domainModel:PhoneNumberModel = PhoneNumberModel()
     private val compositeDisposable = CompositeDisposable()
 
-    val database2 by lazy { database2.getDatabase(this, applicationScope) }
-    val repository by lazy { DialRepository(database.phoneNumberDao()) }
 
     fun onAppLaunched(){
         val disposable=userHasOpenedAppUseCase.buildUseCase()

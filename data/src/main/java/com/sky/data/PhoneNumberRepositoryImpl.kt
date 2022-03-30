@@ -10,14 +10,13 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 
-class PhoneNumberRepositoryImpl @Inject constructor(
+class PhoneNumberRepositoryImpl
+@Inject constructor(
     private val phoneNumberDao: PhoneNumberDao,
     private val mapper: PhoneNumberDtoToDomainMapper,
 ) : DialRepository {
 
     val listPhoneNumbers= mutableListOf<String>()
-
-
 
     override fun updateNumbers(number: String): Completable {
         return phoneNumberDao.insert(
